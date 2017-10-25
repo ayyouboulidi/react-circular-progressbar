@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CircularProgressbar from '../src';
 
-console.log(`react-circular-progressbar v${COMPONENT_VERSION}`);
+console.log(`react-pie-progressbar v${COMPONENT_VERSION}`);
 
-const githubURL = 'https://github.com/iqnivek/react-circular-progressbar';
+const githubURL = 'https://github.com/ayyouboulidi/react-circular-progressbar';
 
 const Example = ({ description, children }) => (
   <div className="col-xs-12 col-sm-6 col-md-3">
@@ -99,6 +99,17 @@ class Demo extends React.Component {
               percentage={66}
             />
           </Example>
+
+          <Example
+          description="Customize background with image."
+        >
+          <CircularProgressbar
+            percentage={33}
+            strokeWidth={5}
+            backgroundImage="https://www.w3.org/TR/SVG2/images/text/text-shape-padding.png"
+            textForPercentage={() => ``}
+          />
+        </Example>
 
           <Example
             description="With SVG and CSS you can do anything."

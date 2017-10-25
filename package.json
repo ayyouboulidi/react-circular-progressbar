@@ -1,10 +1,10 @@
 {
-  "name": "react-circular-progressbar",
-  "version": "0.5.0",
+  "name": "react-pie-progressbar",
+  "version": "0.6.0",
   "description": "A circular progress indicator component",
-  "author": "Kevin Qi <iqnivek@gmail.com>",
+  "author": "Ayy OULIDI <ayyouboulidiomali@gmail.com>",
   "main": "./build/index.js",
-  "repository": "https://github.com/iqnivek/react-circular-progressbar.git",
+  "repository": "https://github.com/ayyouboulidi/react-circular-progressbar.git",
   "license": "MIT",
   "keywords": [
     "progressbar",
@@ -13,8 +13,8 @@
     "svg"
   ],
   "scripts": {
-    "build": "NODE_ENV=production webpack && npm run build:demo",
-    "build:demo": "NODE_ENV=demo webpack && cp ./src/styles.css ./docs/styles.css",
+    "build": "SET NODE_ENV=production webpack && npm run build:demo",
+    "build:demo": "SET NODE_ENV=demo webpack && cp ./src/styles.css ./docs/styles.css",
     "clean": "rimraf build",
     "lint": "eslint src test",
     "prepare": "npm run clean && npm run build",
