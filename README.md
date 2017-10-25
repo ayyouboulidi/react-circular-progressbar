@@ -26,8 +26,6 @@ import CircularProgressbar from 'react-pie-progressbar';
 <CircularProgressbar percentage={60} />
 ```
 
-For more in-depth examples, take a look at the [demo code](docs/demo.jsx) to see JSX for the [live demo page](http://www.kevinqi.com/react-circular-progressbar/).
-
 ## Props
 
 | Name | Description |
