@@ -106,7 +106,7 @@ class Demo extends React.Component {
           <CircularProgressbar
             percentage={33}
             strokeWidth={5}
-            backgroundImage="https://www.w3.org/TR/SVG2/images/text/text-shape-padding.png"
+            backgroundImage="https://i.stack.imgur.com/MI3ZI.png"      
             textForPercentage={() => ``}
           />
         </Example>

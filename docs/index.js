@@ -6460,7 +6460,7 @@ module.exports = lowPriorityWarning;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -6491,195 +6491,190 @@ var MAX_PERCENTAGE = 100;
  */
 
 var PieProgressBar = function (_Component) {
-  _inherits(PieProgressBar, _Component);
-
-  /**
-   * Creates an instance of PieProgressBar.
-   * @param {object} props 
-   * @memberof PieProgressBar
-   */
-  function PieProgressBar(props) {
-    _classCallCheck(this, PieProgressBar);
-
-    var _this = _possibleConstructorReturn(this, (PieProgressBar.__proto__ || Object.getPrototypeOf(PieProgressBar)).call(this, props));
-
-    _this.state = {
-      percentage: props.initialAnimation ? 0 : props.percentage
-    };
-    return _this;
-  }
-
-  /**
-   * default percentage on component did mount
-   * 
-   * @memberof PieProgressBar
-   */
-
-
-  _createClass(PieProgressBar, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      if (this.props.initialAnimation) {
-        this.initialTimeout = setTimeout(function () {
-          _this2.requestAnimationFrame = window.requestAnimationFrame(function () {
-            _this2.setState({
-              percentage: _this2.props.percentage
-            });
-          });
-        }, 0);
-      }
-    }
+    _inherits(PieProgressBar, _Component);
 
     /**
-     * update percentage on receiving new props
-     * 
-     * @param {object} nextProps 
+     * Creates an instance of PieProgressBar.
+     * @param {object} props 
      * @memberof PieProgressBar
      */
+    function PieProgressBar(props) {
+        _classCallCheck(this, PieProgressBar);
 
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState({
-        percentage: nextProps.percentage
-      });
+        var _this = _possibleConstructorReturn(this, (PieProgressBar.__proto__ || Object.getPrototypeOf(PieProgressBar)).call(this, props));
+
+        _this.state = {
+            percentage: props.initialAnimation ? 0 : props.percentage
+        };
+        return _this;
     }
 
     /**
-     * clear timeout on unmounting component
+     * default percentage on component did mount
      * 
      * @memberof PieProgressBar
      */
 
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      clearTimeout(this.initialTimeout);
-      window.cancelAnimationFrame(this.requestAnimationFrame);
-    }
-  }, {
-    key: 'getBackgroundPadding',
-    value: function getBackgroundPadding() {
-      if (this.props.background) {
-        // default padding to be the same as strokeWidth
-        // compare to null because 0 is falsy
-        if (this.props.backgroundPadding == null) {
-          return this.props.strokeWidth;
+
+    _createClass(PieProgressBar, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            if (this.props.initialAnimation) {
+                this.initialTimeout = setTimeout(function () {
+                    _this2.requestAnimationFrame = window.requestAnimationFrame(function () {
+                        _this2.setState({
+                            percentage: _this2.props.percentage
+                        });
+                    });
+                }, 0);
+            }
         }
-        return this.props.backgroundPadding;
-      }
-      // don't add padding if not displaying background
-      return 0;
-    }
-  }, {
-    key: 'getPathDescription',
-    value: function getPathDescription() {
-      var radius = this.getPathRadius();
-      return '\n      M 50,50 m 0,-' + radius + '\n      a ' + radius + ',' + radius + ' 0 1 1 0,' + 2 * radius + '\n      a ' + radius + ',' + radius + ' 0 1 1 0,-' + 2 * radius + '\n    ';
-    }
-  }, {
-    key: 'getProgressStyle',
-    value: function getProgressStyle() {
-      var diameter = Math.PI * 2 * this.getPathRadius();
-      var truncatedPercentage = Math.min(Math.max(this.state.percentage, MIN_PERCENTAGE), MAX_PERCENTAGE);
-      return {
-        strokeDasharray: diameter + 'px ' + diameter + 'px',
-        strokeDashoffset: (100 - truncatedPercentage) / 100 * diameter + 'px'
-      };
-    }
-  }, {
-    key: 'getPathRadius',
-    value: function getPathRadius() {
-      // the radius of the path is defined to be in the middle, so in order for the path to
-      // fit perfectly inside the 100x100 viewBox, need to subtract half the strokeWidth
-      return 50 - this.props.strokeWidth / 2 - this.getBackgroundPadding();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          percentage = _props.percentage,
-          textForPercentage = _props.textForPercentage,
-          className = _props.className,
-          classes = _props.classes,
-          strokeWidth = _props.strokeWidth,
-          backgroundImage = _props.backgroundImage;
 
-      var classForPercentage = this.props.classForPercentage ? this.props.classForPercentage(percentage) : '';
-      var pathDescription = this.getPathDescription();
-      var text = textForPercentage ? textForPercentage(percentage) : null;
-      var image = backgroundImage !== '';
-      // const {height, width} = backgroundImage ? this.imageForBackground(percentage) : null;
+        /**
+         * update percentage on receiving new props
+         * 
+         * @param {object} nextProps 
+         * @memberof PieProgressBar
+         */
 
-      return _react2.default.createElement(
-        'svg',
-        { className: classes.root + ' ' + className + ' ' + classForPercentage, viewBox: '0 0 100 100' },
-        this.props.background ? _react2.default.createElement('circle', { className: classes.background, cx: 50, cy: 50, r: 50 }) : null,
-        _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0 }),
-        _react2.default.createElement('path', { className: classes.path, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0, style: this.getProgressStyle() }),
-        text ? _react2.default.createElement(
-          'text',
-          { className: classes.text, x: 50, y: 50 },
-          ' ',
-          text,
-          ' '
-        ) : null,
-        image ? _react2.default.createElement('image', { xlinkHref: backgroundImage, x: 0, y: 0, height: '100%', width: '100%' }) : null
-      );
-    }
-  }]);
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({
+                percentage: nextProps.percentage
+            });
+        }
 
-  return PieProgressBar;
+        /**
+         * clear timeout on unmounting component
+         * 
+         * @memberof PieProgressBar
+         */
+
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            clearTimeout(this.initialTimeout);
+            window.cancelAnimationFrame(this.requestAnimationFrame);
+        }
+    }, {
+        key: 'getBackgroundPadding',
+        value: function getBackgroundPadding() {
+            if (this.props.background) {
+                // default padding to be the same as strokeWidth
+                // compare to null because 0 is falsy
+                if (this.props.backgroundPadding == null) {
+                    return this.props.strokeWidth;
+                }
+                return this.props.backgroundPadding;
+            }
+            // don't add padding if not displaying background
+            return 0;
+        }
+    }, {
+        key: 'getPathDescription',
+        value: function getPathDescription() {
+            var radius = this.getPathRadius();
+            return '\n        M 50,50 m 0,-' + radius + '\n        a ' + radius + ',' + radius + ' 0 1 1 0,' + 2 * radius + '\n        a ' + radius + ',' + radius + ' 0 1 1 0,-' + 2 * radius + '\n    ';
+        }
+    }, {
+        key: 'getProgressStyle',
+        value: function getProgressStyle() {
+            var diameter = Math.PI * 2 * this.getPathRadius();
+            var truncatedPercentage = Math.min(Math.max(this.state.percentage, MIN_PERCENTAGE), MAX_PERCENTAGE);
+            return {
+                strokeDasharray: diameter + 'px ' + diameter + 'px',
+                strokeDashoffset: (100 - truncatedPercentage) / 100 * diameter + 'px'
+            };
+        }
+    }, {
+        key: 'getPathRadius',
+        value: function getPathRadius() {
+            // the radius of the path is defined to be in the middle, so in order for the path to
+            // fit perfectly inside the 100x100 viewBox, need to subtract half the strokeWidth
+            return 50 - this.props.strokeWidth / 2 - this.getBackgroundPadding();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _props = this.props,
+                percentage = _props.percentage,
+                textForPercentage = _props.textForPercentage,
+                className = _props.className,
+                classes = _props.classes,
+                strokeWidth = _props.strokeWidth,
+                backgroundImage = _props.backgroundImage;
+
+            var classForPercentage = this.props.classForPercentage ? this.props.classForPercentage(percentage) : '';
+            var pathDescription = this.getPathDescription();
+            var text = textForPercentage ? textForPercentage(percentage) : null;
+            var image = backgroundImage !== '';
+            console.log(backgroundImage);
+
+            return _react2.default.createElement(
+                'svg',
+                { className: classes.root + ' ' + className + ' ' + classForPercentage, viewBox: '0 0 100 100' },
+                image ? _react2.default.createElement(
+                    'defs',
+                    null,
+                    _react2.default.createElement(
+                        'pattern',
+                        { id: 'img1', patternUnits: 'userSpaceOnUse', width: '100', height: '100' },
+                        _react2.default.createElement('image', { xlinkHref: backgroundImage, x: '0', y: '0', width: '100', height: '100' })
+                    )
+                ) : null,
+                this.props.background ? _react2.default.createElement('circle', { className: classes.background, cx: 50, cy: 50, r: 50 }) : null,
+                _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0 }),
+                _react2.default.createElement('path', { className: classes.path, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: image ? null : 0, style: this.getProgressStyle(), fill: image ? "url(#img1)" : null }),
+                text ? _react2.default.createElement(
+                    'text',
+                    { className: classes.text, x: 50, y: 50 },
+                    ' ',
+                    text,
+                    ' '
+                ) : null
+            );
+        }
+    }]);
+
+    return PieProgressBar;
 }(_react.Component);
 
-/**
-   * props Validation
-   * 
-   * @static
-   * @memberof PieProgressBar
-   */
+PieProgressBar.propTypes = {
+    percentage: _propTypes2.default.number.isRequired,
+    className: _propTypes2.default.string,
+    classes: _propTypes2.default.objectOf(_propTypes2.default.string),
+    strokeWidth: _propTypes2.default.number,
+    background: _propTypes2.default.bool,
+    backgroundPadding: _propTypes2.default.number,
+    initialAnimation: _propTypes2.default.bool,
+    classForPercentage: _propTypes2.default.func,
+    textForPercentage: _propTypes2.default.func,
+    backgroundImage: _propTypes2.default.string
+};
 
+PieProgressBar.defaultProps = {
+    strokeWidth: 8,
+    className: '',
+    classes: {
+        root: 'CircularProgressbar',
+        trail: 'CircularProgressbar-trail',
+        path: 'CircularProgressbar-path',
+        text: 'CircularProgressbar-text',
+        background: 'CircularProgressbar-background'
+    },
+    background: false,
+    backgroundPadding: null,
+    initialAnimation: false,
+    backgroundImage: '',
+    textForPercentage: function textForPercentage(percentage) {
+        return percentage + '%';
+    }
+};
 
 exports.default = PieProgressBar;
-PieProgressBar.propTypes = {
-  percentage: _propTypes2.default.number.isRequired,
-  className: _propTypes2.default.string,
-  classes: _propTypes2.default.objectOf(_propTypes2.default.string),
-  strokeWidth: _propTypes2.default.number,
-  background: _propTypes2.default.bool,
-  backgroundPadding: _propTypes2.default.number,
-  initialAnimation: _propTypes2.default.bool,
-  classForPercentage: _propTypes2.default.func,
-  backgroundImage: _propTypes2.default.string,
-  textForPercentage: _propTypes2.default.func
-};
-
-/**
- * default props
- * 
- * @static
- * @memberof PieProgressBar
- */
-PieProgressBar.defaultProps = {
-  strokeWidth: 8,
-  className: '',
-  classes: {
-    root: 'CircularProgressBar',
-    trail: 'CircularProgressBar-trail',
-    path: 'CircularProgressBar-path',
-    text: 'CircularProgressBar-text',
-    background: 'CircularProgressBar-background'
-  },
-  background: false,
-  backgroundPadding: null,
-  initialAnimation: false,
-  backgroundImage: '',
-  textForPercentage: function textForPercentage(percentage) {
-    return percentage + '%';
-  }
-};
 
 /***/ }),
 /* 50 */
@@ -10376,7 +10371,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-console.log('react-pie-progressbar v' + "0.6.0");
+console.log('react-pie-progressbar v' + "0.6.2");
 
 var githubURL = 'https://github.com/ayyouboulidi/react-circular-progressbar';
 
@@ -10545,7 +10540,7 @@ var Demo = function (_React$Component2) {
             _react2.default.createElement(_src2.default, {
               percentage: 33,
               strokeWidth: 5,
-              backgroundImage: 'https://www.w3.org/TR/SVG2/images/text/text-shape-padding.png',
+              backgroundImage: 'https://i.stack.imgur.com/MI3ZI.png',
               textForPercentage: function textForPercentage() {
                 return '';
               }

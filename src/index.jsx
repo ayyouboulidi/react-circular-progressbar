@@ -106,14 +106,20 @@ class PieProgressBar extends Component {
     const pathDescription = this.getPathDescription();
     const text = textForPercentage ? textForPercentage(percentage) : null;
     const image = backgroundImage !== '';
+    console.log(backgroundImage)
 
     return (
         <svg className={`${classes.root} ${className} ${classForPercentage}`} viewBox="0 0 100 100">
-          {this.props.background ? <circle className={classes.background} cx={50} cy={50} r={50} /> : null}
-          <path className={classes.trail} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={0}/>
-          <path className={classes.path} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={0} style={this.getProgressStyle()}/>
-          { text ? <text className={classes.text} x={50} y={50} > {text} </text> : null}
-          { image ? <image xlinkHref={backgroundImage} x={0} y={0} height="100%" width="100%"/> : null }
+            { image ?
+            <defs>
+                <pattern id="img1" patternUnits="userSpaceOnUse" width="100" height="100">
+                    <image xlinkHref={backgroundImage} x="0" y="0" width="100" height="100" />
+                </pattern>
+            </defs> : null}
+            {this.props.background ? <circle className={classes.background} cx={50} cy={50} r={50} /> : null}
+            <path className={classes.trail} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={0}/>
+            <path className={classes.path} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={image ? null: 0} style={this.getProgressStyle()} fill={image ? "url(#img1)" : null}/>
+            { text ? <text className={classes.text} x={50} y={50} > {text} </text> : null}
         </svg>
     );
     }
