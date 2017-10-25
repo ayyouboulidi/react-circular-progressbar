@@ -7,7 +7,7 @@ A circular Pie progress indicator component, built with SVG. Easily customizable
 Install the npm module:
 
 ```bash
-npm install react-circular-progressbar
+npm install react-pie-progressbar
 ```
 
 **Important**: you'll also need to copy [src/styles.css](src/styles.css) into your repo to use the default styling!

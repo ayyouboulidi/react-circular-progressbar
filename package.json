@@ -13,8 +13,8 @@
     "svg"
   ],
   "scripts": {
-    "build": "SET NODE_ENV=production webpack && npm run build:demo",
-    "build:demo": "SET NODE_ENV=demo webpack && cp ./src/styles.css ./docs/styles.css",
+    "build": "NODE_ENV=production webpack && npm run build:demo",
+    "build:demo": "NODE_ENV=demo webpack && cp ./src/styles.css ./docs/styles.css",
     "clean": "rimraf build",
     "lint": "eslint src test",
     "prepare": "npm run clean && npm run build",
