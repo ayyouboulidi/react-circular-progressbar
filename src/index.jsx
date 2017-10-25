@@ -117,8 +117,8 @@ class PieProgressBar extends Component {
                 </pattern>
             </defs> : null}
             {this.props.background ? <circle className={classes.background} cx={50} cy={50} r={50} /> : null}
-            <path className={classes.trail} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={0}/>
-            <path className={classes.path} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={image ? null: 0} style={this.getProgressStyle()} fill={image ? "url(#img1)" : null}/>
+            <path className={classes.trail} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={image ? null: 0} fill={image ? "url(#img1)" : null}/>
+            <path className={classes.path} d={pathDescription} strokeWidth={strokeWidth} fillOpacity={0} style={this.getProgressStyle()} />
             { text ? <text className={classes.text} x={50} y={50} > {text} </text> : null}
         </svg>
     );
