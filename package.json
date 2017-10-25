@@ -1,6 +1,6 @@
 {
   "name": "react-pie-progressbar",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A circular progress indicator component",
   "author": "Ayy OULIDI <ayyouboulidiomali@gmail.com>",
   "main": "./build/index.js",

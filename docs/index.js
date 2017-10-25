@@ -6484,13 +6484,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var MIN_PERCENTAGE = 0;
 var MAX_PERCENTAGE = 100;
 
-var CircularProgressbar = function (_React$Component) {
-  _inherits(CircularProgressbar, _React$Component);
+/** 
+ * @export
+ * @class PieProgressBar
+ * @extends {Component}
+ */
 
-  function CircularProgressbar(props) {
-    _classCallCheck(this, CircularProgressbar);
+var PieProgressBar = function (_Component) {
+  _inherits(PieProgressBar, _Component);
 
-    var _this = _possibleConstructorReturn(this, (CircularProgressbar.__proto__ || Object.getPrototypeOf(CircularProgressbar)).call(this, props));
+  /**
+   * Creates an instance of PieProgressBar.
+   * @param {object} props 
+   * @memberof PieProgressBar
+   */
+  function PieProgressBar(props) {
+    _classCallCheck(this, PieProgressBar);
+
+    var _this = _possibleConstructorReturn(this, (PieProgressBar.__proto__ || Object.getPrototypeOf(PieProgressBar)).call(this, props));
 
     _this.state = {
       percentage: props.initialAnimation ? 0 : props.percentage
@@ -6498,7 +6509,14 @@ var CircularProgressbar = function (_React$Component) {
     return _this;
   }
 
-  _createClass(CircularProgressbar, [{
+  /**
+   * default percentage on component did mount
+   * 
+   * @memberof PieProgressBar
+   */
+
+
+  _createClass(PieProgressBar, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -6513,6 +6531,14 @@ var CircularProgressbar = function (_React$Component) {
         }, 0);
       }
     }
+
+    /**
+     * update percentage on receiving new props
+     * 
+     * @param {object} nextProps 
+     * @memberof PieProgressBar
+     */
+
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
@@ -6520,6 +6546,13 @@ var CircularProgressbar = function (_React$Component) {
         percentage: nextProps.percentage
       });
     }
+
+    /**
+     * clear timeout on unmounting component
+     * 
+     * @memberof PieProgressBar
+     */
+
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
@@ -6571,54 +6604,46 @@ var CircularProgressbar = function (_React$Component) {
           textForPercentage = _props.textForPercentage,
           className = _props.className,
           classes = _props.classes,
-          strokeWidth = _props.strokeWidth;
+          strokeWidth = _props.strokeWidth,
+          backgroundImage = _props.backgroundImage;
 
       var classForPercentage = this.props.classForPercentage ? this.props.classForPercentage(percentage) : '';
       var pathDescription = this.getPathDescription();
       var text = textForPercentage ? textForPercentage(percentage) : null;
+      var image = backgroundImage !== '';
+      // const {height, width} = backgroundImage ? this.imageForBackground(percentage) : null;
 
       return _react2.default.createElement(
         'svg',
-        {
-          className: classes.root + ' ' + className + ' ' + classForPercentage,
-          viewBox: '0 0 100 100'
-        },
-        this.props.background ? _react2.default.createElement('circle', {
-          className: classes.background,
-          cx: 50,
-          cy: 50,
-          r: 50
-        }) : null,
-        _react2.default.createElement('path', {
-          className: classes.trail,
-          d: pathDescription,
-          strokeWidth: strokeWidth,
-          fillOpacity: 0
-        }),
-        _react2.default.createElement('path', {
-          className: classes.path,
-          d: pathDescription,
-          strokeWidth: strokeWidth,
-          fillOpacity: 0,
-          style: this.getProgressStyle()
-        }),
+        { className: classes.root + ' ' + className + ' ' + classForPercentage, viewBox: '0 0 100 100' },
+        this.props.background ? _react2.default.createElement('circle', { className: classes.background, cx: 50, cy: 50, r: 50 }) : null,
+        _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0 }),
+        _react2.default.createElement('path', { className: classes.path, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0, style: this.getProgressStyle() }),
         text ? _react2.default.createElement(
           'text',
-          {
-            className: classes.text,
-            x: 50,
-            y: 50
-          },
-          text
-        ) : null
+          { className: classes.text, x: 50, y: 50 },
+          ' ',
+          text,
+          ' '
+        ) : null,
+        image ? _react2.default.createElement('image', { xlinkHref: backgroundImage, x: 0, y: 0, height: '100%', width: '100%' }) : null
       );
     }
   }]);
 
-  return CircularProgressbar;
-}(_react2.default.Component);
+  return PieProgressBar;
+}(_react.Component);
 
-CircularProgressbar.propTypes = {
+/**
+   * props Validation
+   * 
+   * @static
+   * @memberof PieProgressBar
+   */
+
+
+exports.default = PieProgressBar;
+PieProgressBar.propTypes = {
   percentage: _propTypes2.default.number.isRequired,
   className: _propTypes2.default.string,
   classes: _propTypes2.default.objectOf(_propTypes2.default.string),
@@ -6627,28 +6652,34 @@ CircularProgressbar.propTypes = {
   backgroundPadding: _propTypes2.default.number,
   initialAnimation: _propTypes2.default.bool,
   classForPercentage: _propTypes2.default.func,
+  backgroundImage: _propTypes2.default.string,
   textForPercentage: _propTypes2.default.func
 };
 
-CircularProgressbar.defaultProps = {
+/**
+ * default props
+ * 
+ * @static
+ * @memberof PieProgressBar
+ */
+PieProgressBar.defaultProps = {
   strokeWidth: 8,
   className: '',
   classes: {
-    root: 'CircularProgressbar',
-    trail: 'CircularProgressbar-trail',
-    path: 'CircularProgressbar-path',
-    text: 'CircularProgressbar-text',
-    background: 'CircularProgressbar-background'
+    root: 'CircularProgressBar',
+    trail: 'CircularProgressBar-trail',
+    path: 'CircularProgressBar-path',
+    text: 'CircularProgressBar-text',
+    background: 'CircularProgressBar-background'
   },
   background: false,
   backgroundPadding: null,
   initialAnimation: false,
+  backgroundImage: '',
   textForPercentage: function textForPercentage(percentage) {
     return percentage + '%';
   }
 };
-
-exports.default = CircularProgressbar;
 
 /***/ }),
 /* 50 */
@@ -10345,9 +10376,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-console.log('react-circular-progressbar v' + "0.5.0");
+console.log('react-pie-progressbar v' + "0.6.0");
 
-var githubURL = 'https://github.com/iqnivek/react-circular-progressbar';
+var githubURL = 'https://github.com/ayyouboulidi/react-circular-progressbar';
 
 var Example = function Example(_ref) {
   var description = _ref.description,
@@ -10438,7 +10469,7 @@ var Demo = function (_React$Component2) {
               _react2.default.createElement(
                 'h1',
                 { className: 'mb-2' },
-                "react-circular-progressbar"
+                "react-pie-progressbar"
               ),
               _react2.default.createElement(
                 'p',
@@ -10509,6 +10540,20 @@ var Demo = function (_React$Component2) {
           _react2.default.createElement(
             Example,
             {
+              description: 'Customize background with image.'
+            },
+            _react2.default.createElement(_src2.default, {
+              percentage: 33,
+              strokeWidth: 5,
+              backgroundImage: 'https://www.w3.org/TR/SVG2/images/text/text-shape-padding.png',
+              textForPercentage: function textForPercentage() {
+                return '';
+              }
+            })
+          ),
+          _react2.default.createElement(
+            Example,
+            {
               description: 'With SVG and CSS you can do anything.'
             },
             _react2.default.createElement(
@@ -10554,7 +10599,7 @@ var Demo = function (_React$Component2) {
                 'code',
                 null,
                 'npm install ',
-                "react-circular-progressbar"
+                "react-pie-progressbar"
               )
             ),
             _react2.default.createElement(
