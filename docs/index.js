@@ -6611,7 +6611,6 @@ var PieProgressBar = function (_Component) {
             var pathDescription = this.getPathDescription();
             var text = textForPercentage ? textForPercentage(percentage) : null;
             var image = backgroundImage !== '';
-            console.log(backgroundImage);
 
             return _react2.default.createElement(
                 'svg',
@@ -6621,12 +6620,12 @@ var PieProgressBar = function (_Component) {
                     null,
                     _react2.default.createElement(
                         'pattern',
-                        { id: 'img1', patternUnits: 'userSpaceOnUse', width: '100', height: '100' },
+                        { id: backgroundImage, patternUnits: 'userSpaceOnUse', width: '100', height: '100' },
                         _react2.default.createElement('image', { xlinkHref: backgroundImage, x: '0', y: '0', width: '100', height: '100' })
                     )
                 ) : null,
                 this.props.background ? _react2.default.createElement('circle', { className: classes.background, cx: 50, cy: 50, r: 50 }) : null,
-                _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: image ? null : 0, fill: image ? "url(#img1)" : null }),
+                _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: image ? null : 0, fill: image ? '"url(#' + { backgroundImage: backgroundImage } + ')"' : null }),
                 _react2.default.createElement('path', { className: classes.path, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0, style: this.getProgressStyle() }),
                 text ? _react2.default.createElement(
                     'text',
@@ -10371,7 +10370,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-console.log('react-pie-progressbar v' + "0.6.3");
+console.log('react-pie-progressbar v' + "0.6.4");
 
 var githubURL = 'https://github.com/ayyouboulidi/react-circular-progressbar';
 
