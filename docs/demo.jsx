@@ -88,6 +88,54 @@ class Demo extends React.Component {
             />
           </Example>
 
+
+          <Example
+            description="Add a background color for that inverted look."
+          >
+            <CircularProgressbar
+              className="CircularProgressbar-inverted"
+              background
+              backgroundPadding={5}
+              strokeWidth={6}
+              percentage={66}
+            />
+          </Example>
+
+          <Example
+          description="Customize background with image."
+        >
+          <CircularProgressbar
+            percentage={53}
+            strokeWidth={5}
+            backgroundImage="https://i.stack.imgur.com/MI3ZI.png"      
+            textForPercentage={() => ``}
+          />
+        </Example>
+
+
+        <Example
+            description="Add a background color for that inverted look."
+          >
+            <CircularProgressbar
+              className="CircularProgressbar-inverted"
+              background
+              backgroundPadding={5}
+              strokeWidth={6}
+              percentage={66}
+            />
+          </Example>
+
+          <Example
+          description="Customize background with image."
+        >
+          <CircularProgressbar
+            percentage={3}
+            strokeWidth={5}
+            backgroundImage="https://i.stack.imgur.com/MI3ZI.png"      
+            textForPercentage={() => ``}
+          />
+        </Example>
+
           <Example
             description="Add a background color for that inverted look."
           >
@@ -106,7 +154,7 @@ class Demo extends React.Component {
           <CircularProgressbar
             percentage={33}
             strokeWidth={5}
-            backgroundImage="https://i.stack.imgur.com/MI3ZI.png"      
+            backgroundImage="https://i.imgur.com/b9NyUGm.png"      
             textForPercentage={() => ``}
           />
         </Example>
