@@ -6611,6 +6611,7 @@ var PieProgressBar = function (_Component) {
             var pathDescription = this.getPathDescription();
             var text = textForPercentage ? textForPercentage(percentage) : null;
             var image = backgroundImage !== '';
+            var fill = image ? 'url(#' + backgroundImage + ')' : null;
 
             return _react2.default.createElement(
                 'svg',
@@ -6625,7 +6626,7 @@ var PieProgressBar = function (_Component) {
                     )
                 ) : null,
                 this.props.background ? _react2.default.createElement('circle', { className: classes.background, cx: 50, cy: 50, r: 50 }) : null,
-                _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: image ? null : 0, fill: image ? '"url(#' + { backgroundImage: backgroundImage } + ')"' : null }),
+                _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: image ? null : 0, fill: fill }),
                 _react2.default.createElement('path', { className: classes.path, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0, style: this.getProgressStyle() }),
                 text ? _react2.default.createElement(
                     'text',
@@ -10370,7 +10371,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-console.log('react-pie-progressbar v' + "0.6.4");
+console.log('react-pie-progressbar v' + "0.6.8");
 
 var githubURL = 'https://github.com/ayyouboulidi/react-circular-progressbar';
 
@@ -10537,9 +10538,63 @@ var Demo = function (_React$Component2) {
               description: 'Customize background with image.'
             },
             _react2.default.createElement(_src2.default, {
-              percentage: 33,
+              percentage: 53,
               strokeWidth: 5,
               backgroundImage: 'https://i.stack.imgur.com/MI3ZI.png',
+              textForPercentage: function textForPercentage() {
+                return '';
+              }
+            })
+          ),
+          _react2.default.createElement(
+            Example,
+            {
+              description: 'Add a background color for that inverted look.'
+            },
+            _react2.default.createElement(_src2.default, {
+              className: 'CircularProgressbar-inverted',
+              background: true,
+              backgroundPadding: 5,
+              strokeWidth: 6,
+              percentage: 66
+            })
+          ),
+          _react2.default.createElement(
+            Example,
+            {
+              description: 'Customize background with image.'
+            },
+            _react2.default.createElement(_src2.default, {
+              percentage: 3,
+              strokeWidth: 5,
+              backgroundImage: 'https://i.stack.imgur.com/MI3ZI.png',
+              textForPercentage: function textForPercentage() {
+                return '';
+              }
+            })
+          ),
+          _react2.default.createElement(
+            Example,
+            {
+              description: 'Add a background color for that inverted look.'
+            },
+            _react2.default.createElement(_src2.default, {
+              className: 'CircularProgressbar-inverted',
+              background: true,
+              backgroundPadding: 5,
+              strokeWidth: 6,
+              percentage: 66
+            })
+          ),
+          _react2.default.createElement(
+            Example,
+            {
+              description: 'Customize background with image.'
+            },
+            _react2.default.createElement(_src2.default, {
+              percentage: 33,
+              strokeWidth: 5,
+              backgroundImage: 'https://i.imgur.com/b9NyUGm.png',
               textForPercentage: function textForPercentage() {
                 return '';
               }
