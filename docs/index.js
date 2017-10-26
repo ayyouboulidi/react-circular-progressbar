@@ -6626,8 +6626,8 @@ var PieProgressBar = function (_Component) {
                     )
                 ) : null,
                 this.props.background ? _react2.default.createElement('circle', { className: classes.background, cx: 50, cy: 50, r: 50 }) : null,
-                _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0 }),
-                _react2.default.createElement('path', { className: classes.path, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: image ? null : 0, style: this.getProgressStyle(), fill: image ? "url(#img1)" : null }),
+                _react2.default.createElement('path', { className: classes.trail, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: image ? null : 0, fill: image ? "url(#img1)" : null }),
+                _react2.default.createElement('path', { className: classes.path, d: pathDescription, strokeWidth: strokeWidth, fillOpacity: 0, style: this.getProgressStyle() }),
                 text ? _react2.default.createElement(
                     'text',
                     { className: classes.text, x: 50, y: 50 },
@@ -10371,7 +10371,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-console.log('react-pie-progressbar v' + "0.6.2");
+console.log('react-pie-progressbar v' + "0.6.3");
 
 var githubURL = 'https://github.com/ayyouboulidi/react-circular-progressbar';
 
